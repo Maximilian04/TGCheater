@@ -15,7 +15,7 @@ public:
     BrickStacker();
 
     void findTemplate(Mat& templ, Point& pos);
-    void findTemplate(Mat& templ, Point& pos, double scale);
+    void findTemplateTurbo(Mat& templ, Point& pos);
 
     void play();
     const Point& getHandPosition();

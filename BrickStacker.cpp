@@ -13,26 +13,26 @@ void BrickStacker::findTemplate(Mat& templ, Point& pos) {
     matchTemplate(screen, templ, result, TM_CCOEFF_NORMED);
     Point resultPos;
     double resultDouble;
+
     minMaxLoc(result, nullptr, &resultDouble, nullptr, &resultPos);
-    cout << resultDouble << endl;
     pos = resultPos;
 }
 
-void BrickStacker::findTemplate(Mat& templ, Point& pos, double scale) {
+void BrickStacker::findTemplateTurbo(Mat& templ, Point& pos) {
     Mat result(screenScaled.rows, screenScaled.cols, CV_32FC1);
     matchTemplate(screenScaled, templ, result, TM_CCOEFF_NORMED);
     Point resultPos;
     double resultDouble;
+
     minMaxLoc(result, nullptr, &resultDouble, nullptr, &resultPos);
-    cout << resultDouble << endl;
-    pos = resultPos / scale;
+    pos = resultPos / TURBOSCALE;
 }
 
 void BrickStacker::play() {
     WindowsApi::getScreenshot2CVMat(screen);
     resize(screen, screenScaled, Size(screen.cols * TURBOSCALE, screen.rows * TURBOSCALE));
 
-    findTemplate(handTemplateScaled, handPosition, TURBOSCALE);
+    findTemplateTurbo(handTemplateScaled, handPosition);
 }
 
 const Point& BrickStacker::getHandPosition() {

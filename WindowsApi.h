@@ -3,7 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <windows.h>
 
-#define DISPLAY_SCALE (1.75)
+#define DISPLAY_SCALE (1.0)
 
 using namespace std;
 using namespace cv;

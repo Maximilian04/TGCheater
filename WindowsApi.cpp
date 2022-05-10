@@ -136,3 +136,33 @@ void WindowsApi::getScreenshot2CVMat(Mat& img) {
 
     cvtColor(src, img, COLOR_BGRA2BGR);
 }
+
+void WindowsApi::pressSpace() {
+    // based on:
+    // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput
+    // https://batchloaf.wordpress.com/2012/04/17/simulating-a-keystroke-in-win32-c-or-c-using-sendinput/
+    INPUT ip;
+
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wVk = VK_SPACE;
+    ip.ki.dwFlags = 0;
+    //ip.ki.dwFlags = KEYEVENTF_KEYUP;
+
+    UINT uSent = SendInput(1, &ip, sizeof(INPUT));
+}
+
+void WindowsApi::unpressSpace() {
+    INPUT ip;
+
+    ip.type = INPUT_KEYBOARD;
+    ip.ki.wVk = VK_SPACE;
+    ip.ki.dwFlags = KEYEVENTF_KEYUP;
+
+    UINT uSent = SendInput(1, &ip, sizeof(INPUT));
+}
+
+bool WindowsApi::isCtrlPressed() {
+    SHORT state = GetKeyState(VK_RCONTROL);
+
+    return (state < 0);
+}

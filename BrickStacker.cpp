@@ -32,6 +32,12 @@ void BrickStacker::play() {
     WindowsApi::getScreenshot2CVMat(screen);
     resize(screen, screenScaled, Size(screen.cols * TURBOSCALE, screen.rows * TURBOSCALE));
 
+    if (WindowsApi::isCtrlPressed()) {
+        WindowsApi::pressSpace();
+    } else {
+        WindowsApi::unpressSpace();
+    }
+
     findTemplateTurbo(handTemplateScaled, handPosition);
 }
 

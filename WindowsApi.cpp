@@ -166,3 +166,13 @@ bool WindowsApi::isCtrlPressed() {
 
     return (state < 0);
 }
+
+bool WindowsApi::isCtrlClicked() {
+    SHORT state = GetKeyState(VK_RCONTROL);
+    
+    static bool prevClickState = state % 2;
+    bool isNewClick = (prevClickState != bool(state % 2));
+    prevClickState = state % 2;
+
+    return isNewClick;
+}

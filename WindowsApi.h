@@ -17,5 +17,6 @@ public:
     static void pressSpace();
     static void unpressSpace();
     static bool isCtrlPressed();
+    static bool isCtrlClicked();
 private:
 };
